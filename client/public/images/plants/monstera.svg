@@ -1,0 +1,42 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Pot -->
+  <ellipse cx="200" cy="380" rx="85" ry="20" fill="#8B4513"/>
+  <rect x="115" y="315" width="170" height="65" fill="#A0522D" rx="10"/>
+  <ellipse cx="200" cy="315" rx="85" ry="20" fill="#CD853F"/>
+  
+  <!-- Soil -->
+  <ellipse cx="200" cy="315" rx="80" ry="18" fill="#654321"/>
+  
+  <!-- Main stem -->
+  <rect x="195" y="180" width="10" height="135" fill="#228B22"/>
+  
+  <!-- Monstera leaves with holes -->
+  <g transform="translate(200,220)">
+    <!-- Left large leaf -->
+    <path d="M-60,-10 Q-80,-30 -70,-70 Q-60,-90 -40,-85 Q-20,-80 0,-75 Q20,-70 10,-50 Q-10,-20 -60,-10" fill="#2E8B57" stroke="#228B22" stroke-width="2"/>
+    <!-- Holes in left leaf -->
+    <ellipse cx="-40" cy="-50" rx="8" ry="12" fill="white"/>
+    <ellipse cx="-25" cy="-60" rx="6" ry="8" fill="white"/>
+    
+    <!-- Right large leaf -->
+    <path d="M60,-10 Q80,-30 70,-70 Q60,-90 40,-85 Q20,-80 0,-75 Q-20,-70 -10,-50 Q10,-20 60,-10" fill="#32CD32" stroke="#228B22" stroke-width="2"/>
+    <!-- Holes in right leaf -->
+    <ellipse cx="40" cy="-50" rx="8" ry="12" fill="white"/>
+    <ellipse cx="25" cy="-60" rx="6" ry="8" fill="white"/>
+    
+    <!-- Top center leaf -->
+    <path d="M0,-60 Q-30,-80 -20,-120 Q-10,-140 10,-135 Q30,-130 20,-110 Q10,-80 0,-60" fill="#228B22" stroke="#006400" stroke-width="2"/>
+    <!-- Hole in top leaf -->
+    <ellipse cx="0" cy="-100" rx="5" ry="8" fill="white"/>
+  </g>
+  
+  <!-- Support stake -->
+  <rect x="220" y="100" width="4" height="220" fill="#8B4513"/>
+  
+  <!-- Leaf veins -->
+  <g stroke="#006400" stroke-width="1" fill="none">
+    <path d="M140,210 Q150,190 160,170"/>
+    <path d="M260,210 Q250,190 240,170"/>
+    <path d="M200,160 L200,120"/>
+  </g>
+</svg>

@@ -1,0 +1,31 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Pot -->
+  <ellipse cx="200" cy="380" rx="80" ry="20" fill="#8B4513"/>
+  <rect x="120" y="320" width="160" height="60" fill="#A0522D" rx="8"/>
+  <ellipse cx="200" cy="320" rx="80" ry="20" fill="#CD853F"/>
+  
+  <!-- Soil -->
+  <ellipse cx="200" cy="320" rx="75" ry="18" fill="#654321"/>
+  
+  <!-- Main stem -->
+  <rect x="195" y="200" width="10" height="120" fill="#228B22"/>
+  
+  <!-- Large fiddle leaves -->
+  <g transform="translate(200,250)">
+    <!-- Left leaf -->
+    <path d="M-40,-20 Q-60,-40 -50,-80 Q-40,-100 -20,-90 Q0,-85 10,-70 Q15,-50 5,-30 Q-10,-15 -40,-20" fill="#2E8B57" stroke="#228B22" stroke-width="2"/>
+    
+    <!-- Right leaf -->
+    <path d="M40,-20 Q60,-40 50,-80 Q40,-100 20,-90 Q0,-85 -10,-70 Q-15,-50 -5,-30 Q10,-15 40,-20" fill="#32CD32" stroke="#228B22" stroke-width="2"/>
+    
+    <!-- Center top leaf -->
+    <path d="M0,-50 Q-25,-70 -15,-110 Q-5,-130 15,-120 Q35,-115 25,-95 Q20,-75 0,-50" fill="#228B22" stroke="#006400" stroke-width="2"/>
+  </g>
+  
+  <!-- Leaf veins -->
+  <g stroke="#006400" stroke-width="1" fill="none">
+    <path d="M160,230 Q170,210 180,190"/>
+    <path d="M240,230 Q230,210 220,190"/>
+    <path d="M200,200 L200,160"/>
+  </g>
+</svg>
