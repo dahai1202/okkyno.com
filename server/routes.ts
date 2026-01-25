@@ -6,6 +6,7 @@ import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
 import { EpicGardeningScraper } from "./scraper";
 import { EpicGardeningScraperV2 } from "./epic-scraper-v2";
+import { ScraperV3 } from "./scraper-v3";
 import { importEpicGardeningContent } from "./import-epic-content";
 import { ComprehensiveEpicScraper } from "./comprehensive-epic-scraper";
 import { AggressiveEpicScraper } from "./aggressive-epic-scraper";
@@ -691,6 +692,39 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Failed to start enhanced scraping:", error);
       res.status(500).json({ error: "Failed to start enhanced scraping process" });
+    }
+  });
+
+  // V3 Scraper - Real Live Scraping
+  app.post("/api/scrape/v3/products", async (req: Request, res: Response) => {
+    try {
+      const { pages = 5 } = req.body;
+      res.json({ message: "Live product scraping started", status: "initiated" });
+
+      // Run in background
+      const scraper = new ScraperV3();
+      scraper.scrapeProducts(Number(pages)).catch(error => {
+        console.error("Live product scraping failed:", error);
+      });
+    } catch (error) {
+      console.error("Failed to start live product scraping:", error);
+      res.status(500).json({ error: "Failed to start live product scraping" });
+    }
+  });
+
+  app.post("/api/scrape/v3/blogs", async (req: Request, res: Response) => {
+    try {
+      const { pages = 3 } = req.body;
+      res.json({ message: "Live blog scraping started", status: "initiated" });
+
+      // Run in background
+      const scraper = new ScraperV3();
+      scraper.scrapeBlogs(Number(pages)).catch(error => {
+        console.error("Live blog scraping failed:", error);
+      });
+    } catch (error) {
+      console.error("Failed to start live blog scraping:", error);
+      res.status(500).json({ error: "Failed to start live blog scraping" });
     }
   });
 

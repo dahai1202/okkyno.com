@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Database, Upload, Download, FileJson, Package, BookOpen, Users, ShoppingCart } from "lucide-react";
+import { Database, Upload, Download, FileJson, Package, BookOpen, Users, ShoppingCart, RefreshCw, CloudDownload } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useQueryClient } from "@tanstack/react-query";
@@ -17,6 +17,7 @@ export default function AdminDataManagerPage() {
   const [importData, setImportData] = useState('');
   const [isImporting, setIsImporting] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
+  const [isScraping, setIsScraping] = useState(false);
 
   // Sample data structures for reference
   const sampleProductData = {
@@ -112,6 +113,28 @@ export default function AdminDataManagerPage() {
     }
   };
 
+  const handleLiveImport = async (type: 'products' | 'blogs') => {
+    setIsScraping(true);
+    try {
+      const endpoint = type === 'products' ? '/api/scrape/v3/products' : '/api/scrape/v3/blogs';
+      const response = await apiRequest('POST', endpoint, { pages: 5 });
+      const result = await response.json();
+
+      toast({
+        title: "Import Started",
+        description: result.message || `Live ${type} import has been initiated in the background.`,
+      });
+    } catch (error) {
+      toast({
+        title: "Import Failed",
+        description: "Failed to start live import process.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsScraping(false);
+    }
+  };
+
   const handleExport = async (type: string) => {
     setIsExporting(true);
 
@@ -199,12 +222,81 @@ export default function AdminDataManagerPage() {
           </div>
         </div>
 
-        <Tabs defaultValue="import" className="space-y-4">
+        <Tabs defaultValue="live" className="space-y-4">
           <TabsList>
-            <TabsTrigger value="import">Import Data</TabsTrigger>
+            <TabsTrigger value="live">Live Import</TabsTrigger>
+            <TabsTrigger value="import">Manual Import</TabsTrigger>
             <TabsTrigger value="export">Export Data</TabsTrigger>
             <TabsTrigger value="samples">Sample Formats</TabsTrigger>
           </TabsList>
+
+          {/* Live Import Tab */}
+          <TabsContent value="live">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <CloudDownload className="h-5 w-5" />
+                    Live Product Import
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-sm text-muted-foreground">
+                    Automatically scrape and import products from Epic Gardening. This process runs in the background and fetches real images, descriptions, and prices.
+                  </p>
+                  <Button
+                    onClick={() => handleLiveImport('products')}
+                    disabled={isScraping}
+                    className="w-full"
+                  >
+                    {isScraping ? (
+                      <>
+                        <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
+                        Importing...
+                      </>
+                    ) : (
+                      <>
+                        <Package className="w-4 h-4 mr-2" />
+                        Start Product Import
+                      </>
+                    )}
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <BookOpen className="h-5 w-5" />
+                    Live Blog Import
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-sm text-muted-foreground">
+                    Automatically scrape and import blog posts from Epic Gardening. This fetches articles, content, and cover images.
+                  </p>
+                  <Button
+                    onClick={() => handleLiveImport('blogs')}
+                    disabled={isScraping}
+                    variant="outline"
+                    className="w-full"
+                  >
+                    {isScraping ? (
+                      <>
+                        <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
+                        Importing...
+                      </>
+                    ) : (
+                      <>
+                        <BookOpen className="w-4 h-4 mr-2" />
+                        Start Blog Import
+                      </>
+                    )}
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
 
           {/* Import Tab */}
           <TabsContent value="import">

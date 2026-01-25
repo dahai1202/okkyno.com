@@ -154,24 +154,27 @@ export class MemStorage implements IStorage {
 
     // Create sample testimonials
     this.createTestimonial({
-      name: "Sarah Johnson",
-      email: "sarah.j@email.com",
-      rating: 5,
+      customerName: "Sarah Johnson",
       content: "Amazing quality plants! My garden has never looked better. The customer service is outstanding and shipping was fast.",
+      rating: 5,
+      customerTitle: "Home Gardener",
+      customerImage: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&q=80"
     }).then(testimonial => this.approveTestimonial(testimonial.id));
 
     this.createTestimonial({
-      name: "Mike Chen", 
-      email: "mike.c@email.com",
-      rating: 5,
+      customerName: "Mike Chen",
       content: "I've been buying from Okkyno for over a year now. Their gardening tools are top-notch and have made gardening so much easier.",
+      rating: 5,
+      customerTitle: "Urban Farmer",
+      customerImage: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&q=80"
     }).then(testimonial => this.approveTestimonial(testimonial.id));
 
     this.createTestimonial({
-      name: "Emily Rodriguez",
-      email: "emily.r@email.com", 
-      rating: 5,
+      customerName: "Emily Rodriguez",
       content: "The plant care guides are incredibly helpful! As a beginner gardener, I couldn't have succeeded without their expert advice.",
+      rating: 5,
+      customerTitle: "Plant Enthusiast",
+      customerImage: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&q=80"
     }).then(testimonial => this.approveTestimonial(testimonial.id));
 
     // Create comprehensive blog posts
